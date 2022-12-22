@@ -1,5 +1,10 @@
 package com.company.jmixpm.screen.main;
 
+import com.company.jmixpm.app.TaskService;
+import com.company.jmixpm.entity.Project;
+import com.company.jmixpm.entity.User;
+import io.jmix.core.DataManager;
+import io.jmix.ui.Notifications;
 import io.jmix.ui.ScreenTools;
 import io.jmix.ui.component.AppWorkArea;
 import io.jmix.ui.component.Button;
@@ -13,6 +18,8 @@ import io.jmix.ui.screen.UiController;
 import io.jmix.ui.screen.UiControllerUtils;
 import io.jmix.ui.screen.UiDescriptor;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 @UiController("MainScreen")
 @UiDescriptor("main-screen.xml")
@@ -28,7 +35,8 @@ public class MainScreen extends Screen implements Window.HasWorkArea {
     private Drawer drawer;
     @Autowired
     private Button collapseDrawerButton;
-
+    @Autowired
+    private Notifications notifications;
 
     @Override
     public AppWorkArea getWorkArea() {
@@ -37,6 +45,11 @@ public class MainScreen extends Screen implements Window.HasWorkArea {
 
     @Subscribe("collapseDrawerButton")
     private void onCollapseDrawerButtonClick(Button.ClickEvent event) {
+        notifications.create(Notifications.NotificationType.TRAY)
+                .withCaption("Caption")
+                .withDescription("Description")
+                .show();
+
         drawer.toggle();
         if (drawer.isCollapsed()) {
             collapseDrawerButton.setIconFromSet(JmixIcon.CHEVRON_RIGHT);

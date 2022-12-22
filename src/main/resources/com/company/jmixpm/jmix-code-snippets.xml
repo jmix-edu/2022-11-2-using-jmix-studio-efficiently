@@ -1,12 +1,10 @@
 <jmixCodeSnippets xmlns="http://jmix.io/schema/core/code-snippets">
-    <category name="Jmix PM">
+    <category name="Jmix PM new">
         <codeSnippet name="Load least busy user" contextTypes="service,controller">
             <inject variable="taskService" classQualifiedName="com.company.jmixpm.app.TaskService"/>
-
             <text language="java">
                 com.company.jmixpm.entity.User leastBusyUser = taskService.findLeastBusyUser();
             </text>
-
             <description>
                 <![CDATA[Gets least busy user]]>
             </description>
@@ -21,14 +19,13 @@
             </text>
             <description>Load project by current authenticated manager</description>
         </codeSnippet>
-
-        <codeSnippet name="Show tray notification" contextTypes="controller">
+        <codeSnippet name="Show tray notification" contextTypes="controller,service">
             <inject variable="notifications" classQualifiedName="io.jmix.ui.Notifications"/>
             <text language="java">
                 notifications.create(Notifications.NotificationType.TRAY)
-                .withCaption("${caption}")
-                .withDescription("${description}")
-                .show();
+                    .withCaption("${caption}")
+                    .withDescription("${description}")
+                    .show();
             </text>
             <description>
                 Show tray notification
